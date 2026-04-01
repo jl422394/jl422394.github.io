@@ -77,9 +77,13 @@
 
         /* ── Hero ── */
         .hero {
-            background: linear-gradient(135deg, var(--navy) 0%, #2a4365 100%);
-            padding: 10rem 2rem 5rem;
+            background: linear-gradient(to bottom, rgba(26,35,50,0.7) 0%, rgba(26,35,50,0.85) 100%),
+                        url('seoul.jpg') center/cover no-repeat fixed;
+            padding: 12rem 2rem 6rem;
             color: #fff;
+            min-height: 70vh;
+            display: flex;
+            align-items: flex-end;
         }
         .hero-inner {
             max-width: 1100px;
@@ -333,7 +337,8 @@
 
         /* ── Contact ── */
         .contact-section {
-            background: var(--navy);
+            background: linear-gradient(to bottom, rgba(26,35,50,0.8) 0%, rgba(26,35,50,0.9) 100%),
+                        url('fog.jpg') center/cover no-repeat fixed;
             color: #fff;
             max-width: 100%;
             padding: 4rem 2rem;
@@ -369,6 +374,27 @@
             line-height: 1.6;
         }
         .contact-card a { color: rgba(255,255,255,0.9); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* ── Photo Divider ── */
+        .photo-divider {
+            height: 280px;
+            background: linear-gradient(to bottom, rgba(26,35,50,0.3) 0%, rgba(26,35,50,0.5) 100%),
+                        url('bridge.jpg') center/cover no-repeat fixed;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .photo-divider .divider-quote {
+            color: rgba(255,255,255,0.9);
+            font-family: 'Lora', serif;
+            font-style: italic;
+            font-size: 1.2rem;
+            text-align: center;
+            max-width: 600px;
+            padding: 0 2rem;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+            letter-spacing: 0.01em;
+        }
 
         /* ── Footer ── */
         footer {
@@ -723,6 +749,11 @@
         </div>
     </div>
 </section>
+
+<!-- Photo Divider -->
+<div class="photo-divider">
+    <div class="divider-quote">&ldquo;Understanding the causal effects of public policies on individual well-being&rdquo;</div>
+</div>
 
 <!-- Experience & Education -->
 <section id="experience">
