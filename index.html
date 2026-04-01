@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jungtaek Lee | Economist</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --navy: #1a2332;
+            --dark: #2c3e50;
+            --accent: #3d6b99;
+            --accent-light: #e8f0f8;
+            --text: #333;
+            --text-light: #666;
+            --bg: #fafbfc;
+            --white: #fff;
+            --border: #e2e8f0;
+            --tag-health: #2e7d6f;
+            --tag-labor: #8b5e3c;
+            --tag-social: #5c4fa0;
+            --tag-policy: #9c5070;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            background: var(--bg);
+            line-height: 1.7;
+        }
+
+        /* ── Navigation ── */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(26,35,50,0.97);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            padding: 0 2rem;
+        }
+        nav .nav-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 60px;
+        }
+        nav .logo {
+            color: #fff;
+            font-weight: 600;
+            font-size: 1.05rem;
+            letter-spacing: -0.02em;
+        }
+        nav .nav-links a {
+            color: rgba(255,255,255,0.75);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-size: 0.88rem;
+            font-weight: 400;
+            transition: color 0.2s;
+            letter-spacing: 0.02em;
+        }
+        nav .nav-links a:hover { color: #fff; }
+
+        /* ── Hero ── */
+        .hero {
+            background: linear-gradient(135deg, var(--navy) 0%, #2a4365 100%);
+            padding: 10rem 2rem 5rem;
+            color: #fff;
+        }
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+        .hero-profile {
+            display: flex;
+            align-items: flex-start;
+            gap: 2rem;
+        }
+        .hero-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.3);
+            flex-shrink: 0;
+        }
+        .hero h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 0.3rem;
+        }
+        .hero .subtitle {
+            font-size: 1.15rem;
+            font-weight: 300;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 1.5rem;
+        }
+        .hero .affiliation {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.8;
+        }
+        .hero .affiliation a {
+            color: rgba(255,255,255,0.8);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+        .hero-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .hero-links a {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.5rem 1.2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+            border-radius: 6px;
+            color: #fff;
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: all 0.2s;
+        }
+        .hero-links a:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.5);
+        }
+
+        /* ── Sections ── */
+        section {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+        section h2 {
+            font-family: 'Lora', serif;
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        section .section-line {
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            margin-bottom: 2rem;
+            border-radius: 2px;
+        }
+
+        /* ── About ── */
+        .about-text {
+            font-size: 1.05rem;
+            line-height: 1.85;
+            color: var(--text);
+            max-width: 850px;
+        }
+        .about-text strong { color: var(--navy); }
+        .research-keywords {
+            display: flex;
+            gap: 0.6rem;
+            flex-wrap: wrap;
+            margin-top: 1.5rem;
+        }
+        .keyword {
+            padding: 0.35rem 0.9rem;
+            background: var(--accent-light);
+            color: var(--accent);
+            font-size: 0.82rem;
+            font-weight: 500;
+            border-radius: 20px;
+        }
+
+        /* ── Publications ── */
+        .pub-category {
+            margin-bottom: 3rem;
+        }
+        .pub-category h3 {
+            font-size: 1.15rem;
+            font-weight: 600;
+            color: var(--navy);
+            margin-bottom: 1.2rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid var(--border);
+        }
+        .pub-category h3 span {
+            font-size: 0.82rem;
+            font-weight: 400;
+            color: var(--text-light);
+            margin-left: 0.5rem;
+        }
+        .pub-item {
+            padding: 1.2rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .pub-item:last-child { border-bottom: none; }
+        .pub-title {
+            font-weight: 600;
+            font-size: 0.98rem;
+            color: var(--navy);
+            margin-bottom: 0.3rem;
+            line-height: 1.5;
+        }
+        .pub-authors {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 0.3rem;
+        }
+        .pub-authors .me { font-weight: 600; color: var(--text); }
+        .pub-journal {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            font-style: italic;
+        }
+        .pub-journal .badge {
+            display: inline-block;
+            font-style: normal;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            margin-left: 0.4rem;
+            vertical-align: middle;
+        }
+        .badge-ssci { background: #e3f2fd; color: #1565c0; }
+        .badge-sci { background: #e8f5e9; color: #2e7d32; }
+        .badge-kci { background: #fff3e0; color: #e65100; }
+        .pub-summary {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 0.5rem;
+            line-height: 1.65;
+            padding-left: 0.8rem;
+            border-left: 2px solid var(--border);
+        }
+        .pub-tag {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 500;
+            padding: 0.12rem 0.5rem;
+            border-radius: 3px;
+            margin-right: 0.3rem;
+            margin-top: 0.4rem;
+        }
+        .tag-health { background: #e6f4f1; color: var(--tag-health); }
+        .tag-labor { background: #f5efe8; color: var(--tag-labor); }
+        .tag-social { background: #eeeaf7; color: var(--tag-social); }
+        .tag-policy { background: #f5e9ee; color: var(--tag-policy); }
+
+        /* ── Timeline (Experience & Education) ── */
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border);
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.45rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--accent);
+            border: 2px solid var(--white);
+            transform: translateX(-4px);
+        }
+        .timeline-item h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--navy);
+        }
+        .timeline-item .period {
+            font-size: 0.85rem;
+            color: var(--accent);
+            font-weight: 500;
+            margin-bottom: 0.2rem;
+        }
+        .timeline-item .detail {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        /* ── Two Column ── */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+        }
+
+        /* ── Service ── */
+        .service-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid var(--border);
+            font-size: 0.92rem;
+        }
+        .service-item:last-child { border-bottom: none; }
+        .service-item .role { font-weight: 600; color: var(--navy); }
+        .service-item .org { color: var(--text-light); }
+
+        /* ── Contact ── */
+        .contact-section {
+            background: var(--navy);
+            color: #fff;
+            max-width: 100%;
+            padding: 4rem 2rem;
+        }
+        .contact-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+        .contact-section h2 { color: #fff; }
+        .contact-section .section-line { background: rgba(255,255,255,0.3); }
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 1.5rem;
+        }
+        .contact-card {
+            padding: 1.5rem;
+            background: rgba(255,255,255,0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .contact-card .label {
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 0.5rem;
+        }
+        .contact-card .value {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.9);
+            line-height: 1.6;
+        }
+        .contact-card a { color: rgba(255,255,255,0.9); text-decoration: underline; text-underline-offset: 3px; }
+
+        /* ── Footer ── */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            background: var(--bg);
+        }
+
+        /* ── KIRI Section ── */
+        .kiri-section {
+            background: #f7f5f0;
+            border-radius: 10px;
+            padding: 2rem;
+            margin-top: 1.5rem;
+        }
+        .kiri-section h3 {
+            border-bottom-color: #d4c9b8;
+        }
+        .kiri-item {
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e8e0d4;
+            font-size: 0.92rem;
+            line-height: 1.6;
+        }
+        .kiri-item:last-child { border-bottom: none; }
+        .kiri-item .kiri-title { font-weight: 600; color: var(--navy); }
+        .kiri-item .kiri-detail { color: var(--text-light); font-size: 0.85rem; }
+
+        /* ── Working Papers ── */
+        .working-paper {
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--border);
+        }
+        .working-paper:last-child { border-bottom: none; }
+        .wp-title { font-weight: 600; font-size: 0.95rem; color: var(--navy); }
+        .wp-status {
+            display: inline-block;
+            font-size: 0.72rem;
+            font-weight: 600;
+            padding: 0.15rem 0.5rem;
+            border-radius: 3px;
+            background: #f0f0f0;
+            color: #666;
+        }
+
+        /* ── Responsive ── */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .two-col { grid-template-columns: 1fr; gap: 2rem; }
+            nav .nav-links a { margin-left: 1rem; font-size: 0.8rem; }
+            section { padding: 3rem 1.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav>
+    <div class="nav-inner">
+        <div class="logo">Jungtaek Lee</div>
+        <div class="nav-links">
+            <a href="#about">About</a>
+            <a href="#publications">Research</a>
+            <a href="#experience">Experience</a>
+            <a href="#teaching">Teaching</a>
+            <a href="#contact">Contact</a>
+        </div>
+    </div>
+</nav>
+
+<!-- Hero -->
+<header class="hero">
+    <div class="hero-inner">
+        <div class="hero-profile">
+            <img src="profile.jpg" alt="Jungtaek Lee" class="hero-photo" onerror="this.style.display='none'">
+            <div>
+            <div class="subtitle">Applied Microeconomist &middot; Health &amp; Labor Economics</div>
+            <div class="affiliation">
+                Assistant Professor, Department of Economics<br>
+                Dongguk University, Seoul
+            </div>
+            <div class="hero-links">
+                <a href="https://scholar.google.com/citations?user=ryZHu90AAAAJ&hl=en">Google Scholar</a>
+                <a href="mailto:jungtaeklee@dongguk.edu">Email</a>
+                <a href="#publications">Publications</a>
+            </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- About -->
+<section id="about">
+    <h2>About</h2>
+    <div class="section-line"></div>
+    <div class="about-text">
+        <p>
+            I am an <strong>applied microeconomist</strong> specializing in <strong>health economics</strong> and <strong>labor economics</strong>.
+            My research investigates the causal effects of public policies&mdash;health insurance expansions, labor market regulations, and pandemic responses&mdash;on individual well-being, health behaviors, and labor market outcomes.
+        </p>
+        <br>
+        <p>
+            Methodologically, I employ <strong>quasi-experimental designs</strong> including difference-in-differences, instrumental variable estimation, and regression discontinuity to establish credible causal inference from observational data.
+            My work spans the intersection of health and labor, with particular attention to how social connectedness, insurance coverage, and workplace arrangements shape population health and economic outcomes.
+        </p>
+        <br>
+        <p>
+            Prior to joining Dongguk University, I served as a Research Fellow at the <strong>Korea Insurance Research Institute (KIRI)</strong> and as an Assistant Professor at <strong>Gachon University</strong>.
+            I received my Ph.D. in Economics from the <strong>University at Albany, SUNY</strong>.
+        </p>
+    </div>
+    <div class="research-keywords">
+        <span class="keyword">Health Economics</span>
+        <span class="keyword">Labor Economics</span>
+        <span class="keyword">Applied Microeconometrics</span>
+        <span class="keyword">Health Insurance</span>
+        <span class="keyword">Remote Work</span>
+        <span class="keyword">Social Connectedness</span>
+        <span class="keyword">Causal Inference</span>
+        <span class="keyword">Policy Evaluation</span>
+    </div>
+</section>
+
+<!-- Publications -->
+<section id="publications">
+    <h2>Research</h2>
+    <div class="section-line"></div>
+
+    <!-- SSCI/SCI -->
+    <div class="pub-category">
+        <h3>Peer-Reviewed Journals: International (SSCI/SCI) <span>9 papers</span></h3>
+
+        <div class="pub-item">
+            <div class="pub-title">Remote Work and the Bargaining Power of Union Workers Before and After COVID-19</div>
+            <div class="pub-authors">Min Sun Park and <span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Applied Economics Letters, 2025 (In Press) <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Examines how the COVID-19 pandemic altered the relationship between union power and remote work arrangements, analyzing whether unions effectively leveraged remote work as a bargaining outcome during and after the crisis.</div>
+            <span class="pub-tag tag-labor">Labor Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Remote Work and Psychological Distress Across Gender, Age, and Employment Sector</div>
+            <div class="pub-authors">Jaehee Jong and <span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">International Journal of Organization Theory &amp; Behavior, 2024, Vol. 27(4), pp. 359&ndash;378 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Using 76,845 observations from the Understanding America Study (2020&ndash;2021), finds that remote work is associated with psychological distress, with heterogeneous effects: stronger for workers aged 30+ and those in nonprofit/private sectors, but not significant for younger or government workers.</div>
+            <span class="pub-tag tag-labor">Labor Economics</span>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Age-Specific Changes in the Effects of Social Connectedness and Loneliness on Depressive Symptoms: Evidence from the Korean Longitudinal Study of Ageing Before and During the COVID-19 Pandemic</div>
+            <div class="pub-authors">Juyeon Kim and <span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Psychiatry Investigation, 2024, Vol. 21(5), pp. 475&ndash;486 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Reveals that loneliness has a substantially larger impact on depression than social disconnection across age groups. Middle-aged adults (45&ndash;64) experienced heightened depressive symptoms during COVID-19, while the oldest group (75+) saw reduced depression despite decreased social interaction.</div>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Effects of Private Health Insurance on Healthcare Services During the MERS Pandemic: Evidence from Korea</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Heliyon, 2023, Vol. 9(12), e22241 <span class="badge badge-sci">SCI</span></div>
+            <div class="pub-summary">Investigates whether private health insurance coverage influenced healthcare service utilization during the 2015 MERS outbreak in Korea, providing evidence on the role of supplementary insurance during pandemic-driven healthcare disruptions.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Effect of Vaccination on Social Isolation During the COVID-19 Pandemic</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Applied Economics Letters, 2023, Vol. 30(15), pp. 1987&ndash;1994 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Using data from 6,049 individuals in the Understanding America Study, finds that vaccination increased in-person contact with family/friends by ~2 percentage points and reduced loneliness by ~1 percentage point.</div>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Social Connectedness and Cognitive Function Before and During COVID-19: A Longitudinal Study of Korean Older Adults with an Instrumental Variable Regression</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> and Juyeon Kim</div>
+            <div class="pub-journal">Psychiatry Investigation, 2023, Vol. 20(4), pp. 325&ndash;333 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Employing the COVID-19 pandemic as an instrumental variable, establishes that reduced social interaction frequency causally leads to cognitive decline among Korean older adults. A one-unit increase in meeting frequency raised cognitive scores by 0.15&ndash;0.50 points.</div>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Role of Health Insurance in Mental Healthcare for Young Adults</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> and Juyeon Kim</div>
+            <div class="pub-journal">Applied Economics, 2020, Vol. 52(42), pp. 4577&ndash;4593 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Exploits the ACA dependent coverage expansion using a regression discontinuity design with NHIS data (2011&ndash;2013) to estimate the causal effect of health insurance on young adults' mental healthcare utilization.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Effects of Health Insurance Coverage on Risky Behaviors</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Health Economics, 2018, Vol. 27(4), pp. 762&ndash;777 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Examines the causal relationship between the ACA's dependent coverage expansion and risky behaviors (smoking, drinking, obesity), testing the moral hazard hypothesis&mdash;whether gaining insurance encourages risk-taking through reduced expected costs of poor health.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+            <span class="pub-tag tag-policy">Public Policy</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Does Legalization of Sunday Alcohol Sales Increase Crime? Evidence from Seven States</div>
+            <div class="pub-authors">Baris K. Y&ouml;r&uuml;k and <span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Journal of Studies on Alcohol and Drugs, 2018, Vol. 79(6), pp. 816&ndash;825 <span class="badge badge-ssci">SSCI</span></div>
+            <div class="pub-summary">Using difference-in-differences with FBI NIBRS data (2000&ndash;2010), finds that states legalizing Sunday alcohol sales experienced 16&ndash;23% increases in violent and property crimes on Sundays, with negligible spillover effects on other weekdays.</div>
+            <span class="pub-tag tag-policy">Public Policy</span>
+        </div>
+    </div>
+
+    <!-- KCI -->
+    <div class="pub-category">
+        <h3>Peer-Reviewed Journals: Domestic (KCI) <span>8 papers</span></h3>
+
+        <div class="pub-item">
+            <div class="pub-title">Health Insurance is Healthy: An Effect of Obtaining Medicare on Self-Rated Health</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Journal of Insurance and Finance (&#48372;&#54744;&#44552;&#50997;&#50672;&#44396;), 2023, Vol. 34(1), pp. 65&ndash;99 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Estimates the causal effect of obtaining Medicare eligibility at age 65 on self-rated health, exploiting the sharp eligibility threshold with a regression discontinuity design.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Impact of Social Factors on Adherence to Mask-Wearing During the COVID-19 Outbreak</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">The Journal of Women and Economics (&#50668;&#49457;&#44221;&#51228;&#50672;&#44396;), 2023, Vol. 20(1), pp. 61&ndash;86 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Analyzes how social and demographic factors influenced compliance with mask-wearing policies during the COVID-19 pandemic.</div>
+            <span class="pub-tag tag-policy">Public Policy</span>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Effect of Health Insurance on Self-Rated Health: Evidence from Older Adults with Functional Limitation</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> and Juyeon Kim</div>
+            <div class="pub-journal">The Korean Journal of Health Economics and Policy (&#48372;&#44148;&#44221;&#51228;&#50752;&#51221;&#52293;&#50672;&#44396;), 2022, Vol. 28(4), pp. 123&ndash;156 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Investigates how health insurance affects self-assessed health status among functionally limited older adults, a population particularly sensitive to insurance coverage due to high healthcare needs.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Effect of an Increase in Child Care Needs on Women's Labor Market Outcomes During the COVID-19 Pandemic</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">The Journal of Women and Economics (&#50668;&#49457;&#44221;&#51228;&#50672;&#44396;), 2022, Vol. 19(1), pp. 21&ndash;44 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Examines how the pandemic-driven surge in childcare demands disproportionately affected women's employment, analyzing gender disparities in labor market outcomes when public childcare services were suspended.</div>
+            <span class="pub-tag tag-labor">Labor Economics</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Causal Effect of Depression on Cognitive Function</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">The Korean Journal of Health Economics and Policy (&#48372;&#44148;&#44221;&#51228;&#50752;&#51221;&#52293;&#50672;&#44396;), 2022, Vol. 28(1), pp. 64&ndash;86 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Uses fixed effects models with instrumental variable analysis to establish the causal direction from depression to cognitive decline, addressing the endogeneity challenge inherent in this bidirectional relationship.</div>
+            <span class="pub-tag tag-health">Health Economics</span>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Macroeconomic Impacts of the Reform of National Basic Livelihood Security System</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> and Taejun Lim</div>
+            <div class="pub-journal">Journal of Insurance and Finance (&#48372;&#54744;&#44552;&#50997;&#50672;&#44396;), 2021, Vol. 32(3), pp. 95&ndash;122 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Evaluates the macroeconomic consequences of reforming Korea's national basic livelihood security system, assessing its aggregate effects on economic activity and welfare.</div>
+            <span class="pub-tag tag-policy">Public Policy</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Living Arrangements and Cognitive Function Among Korean Older Adults</div>
+            <div class="pub-authors">Juyeon Kim and <span class="me">Jungtaek Lee</span></div>
+            <div class="pub-journal">Survey Research (&#51312;&#49324;&#50672;&#44396;), 2018, Vol. 19(1), pp. 97&ndash;127 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Examines how different living arrangements&mdash;living alone, with spouse, or with children&mdash;influence cognitive function trajectories among Korean older adults.</div>
+            <span class="pub-tag tag-social">Social Connectedness</span>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">The Effect of Retirement on Health Behaviors, Mental Health and Subjective Health Status</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> and Juyeon Kim</div>
+            <div class="pub-journal">Public Health and Social Science (&#48372;&#44148;&#44284;&#49324;&#54924;&#44284;&#54617;), 2018, Vol. 47(1), pp. 5&ndash;29 <span class="badge badge-kci">KCI</span></div>
+            <div class="pub-summary">Investigates the causal effects of retirement on health-related behaviors, mental health, and self-assessed health, distinguishing between voluntary and involuntary retirement pathways.</div>
+            <span class="pub-tag tag-labor">Labor Economics</span>
+            <span class="pub-tag tag-health">Health Economics</span>
+        </div>
+    </div>
+
+    <!-- KIRI Reports -->
+    <div class="pub-category">
+        <div class="kiri-section">
+            <h3>Korea Insurance Research Institute (KIRI) Publications <span>2015&ndash;2018</span></h3>
+            <p style="font-size: 0.9rem; color: var(--text-light); margin-bottom: 1rem;">
+                Research reports and policy briefs produced during tenure as Research Fellow at KIRI (Sep 2015 &ndash; Aug 2018).
+            </p>
+
+            <div class="kiri-item">
+                <div class="kiri-title">&#51221;&#49888;&#51656;&#54872; &#50948;&#54744;&#48372;&#51109; &#44053;&#54868; &#48169;&#50504; (Strengthening Risk Coverage for Mental Illness)</div>
+                <div class="kiri-detail"><span class="me">&#51060;&#51221;&#53469;</span>, &#51076;&#53468;&#51456;, &#44608;&#46041;&#44216; &middot; &#50672;&#44396;&#48372;&#44256;&#49436; 2018-10, 103p, July 2018</div>
+                <div class="pub-summary" style="margin-top:0.4rem;">&#51221;&#49888;&#51656;&#54872; &#50976;&#48337;&#47456; &#48143; &#50948;&#54744;&#50836;&#51064;&#51012; &#48516;&#49437;&#54616;&#44256;, &#44277;&#51201;&#183;&#49324;&#51201; &#44148;&#44053;&#48372;&#54744;&#51032; &#48372;&#51109;&#49457; &#44053;&#54868; &#48169;&#50504;&#51012; &#51228;&#49884;. Analyzes mental illness prevalence (25.4% of adults) and proposes strategies for strengthening coverage in both public and private insurance sectors.</div>
+            </div>
+
+            <div class="kiri-item">
+                <div class="kiri-title">&#44148;&#44053;&#48372;&#54744; &#48372;&#51109;&#49457; &#54869;&#45824; &#51221;&#52293; &#54217;&#44032;: DSGE &#51217;&#44540; (National Health Insurance Coverage Extension Policy Evaluation: A DSGE Approach)</div>
+                <div class="kiri-detail">&#51076;&#53468;&#51456;, <span class="me">&#51060;&#51221;&#53469;</span>, &#44608;&#54812;&#46976; &middot; &#51221;&#52293;/&#44221;&#50689;&#48372;&#44256;&#49436;, November 2016</div>
+                <div class="pub-summary" style="margin-top:0.4rem;">DSGE(&#46041;&#53468;&#54869;&#47456;&#51201;&#51068;&#48152;&#44512;&#54805;) &#47784;&#54805;&#51012; &#54876;&#50857;&#54616;&#50668; &#44148;&#44053;&#48372;&#54744; &#48372;&#51109;&#47456; 65%&#50640;&#49436; 70%&#47196;&#51032; &#54869;&#45824; &#51221;&#52293;&#51060; &#44144;&#49884;&#44221;&#51228;&#50640; &#48120;&#52824;&#45716; &#50689;&#54693;&#51012; &#48516;&#49437;. Uses DSGE modeling to evaluate macroeconomic impacts of raising national health insurance coverage from 65% toward the 70% target.</div>
+            </div>
+
+            <p style="font-size: 0.82rem; color: var(--text-light); margin-top: 1rem; font-style: italic;">
+                * &#48372;&#54744;&#50672;&#44396;&#50896; &#51116;&#51649; &#49884; &#45796;&#49688;&#51032; KIRI &#47532;&#54252;&#53944;, &#51060;&#49800;&#48516;&#49437;, &#51221;&#52293;&#48372;&#44256;&#49436; &#46321;&#51012; &#51665;&#54596;&#54616;&#50688;&#49845;&#45768;&#45796;. &#51204;&#52404; &#47785;&#47197;&#51008; &#47928;&#51032;&#54644; &#51452;&#49464;&#50836;.
+            </p>
+        </div>
+    </div>
+
+    <!-- Working Papers -->
+    <div class="pub-category">
+        <h3>Working Papers &amp; Work in Progress</h3>
+
+        <div class="working-paper">
+            <div class="wp-title">Medical Marijuana Laws and Crime</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span> (2019)</div>
+            <div class="pub-summary">Finds that medical marijuana laws are associated with a 6&ndash;10% increase in arrests for illegal marijuana possession.</div>
+            <span class="wp-status">Working Paper</span>
+        </div>
+
+        <div class="working-paper">
+            <div class="wp-title">Do the Minimum Legal Drinking and Smoking Age Laws Save Babies?</div>
+            <div class="pub-authors"><span class="me">Jungtaek Lee</span></div>
+            <div class="pub-summary">Investigates the impact of maternal smoking and drinking age laws on infant health outcomes.</div>
+            <span class="wp-status">In Progress</span>
+        </div>
+    </div>
+</section>
+
+<!-- Experience & Education -->
+<section id="experience">
+    <h2>Experience &amp; Education</h2>
+    <div class="section-line"></div>
+    <div class="two-col">
+        <div>
+            <h3 style="font-size:1.05rem; margin-bottom:1.5rem; color:var(--navy);">Employment</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="period">Sep 2019 &ndash; Present</div>
+                    <h4>Assistant Professor</h4>
+                    <div class="detail">Department of Economics, Dongguk University</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">Sep 2018 &ndash; Aug 2019</div>
+                    <h4>Assistant Professor</h4>
+                    <div class="detail">Gachon University</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">Sep 2015 &ndash; Aug 2018</div>
+                    <h4>Research Fellow</h4>
+                    <div class="detail">Korea Insurance Research Institute (KIRI)</div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h3 style="font-size:1.05rem; margin-bottom:1.5rem; color:var(--navy);">Education</h3>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="period">Aug 2015</div>
+                    <h4>Ph.D. in Economics</h4>
+                    <div class="detail">University at Albany, SUNY</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">May 2009</div>
+                    <h4>M.S. in Economics</h4>
+                    <div class="detail">Iowa State University</div>
+                </div>
+                <div class="timeline-item">
+                    <div class="period">Feb 2003</div>
+                    <h4>B.S. in Economics</h4>
+                    <div class="detail">Yonsei University</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Professional Service -->
+<section>
+    <h2>Professional Service</h2>
+    <div class="section-line"></div>
+    <div class="service-item">
+        <span class="role">Member of Board of Directors</span><br>
+        <span class="org">Korea Health Economics and Policy Association, Jan 2022 &ndash; Present</span>
+    </div>
+    <div class="service-item">
+        <span class="role">Advisory Committee Member for the 2025 Population Census</span><br>
+        <span class="org">Statistics Korea, 2023 &ndash; Present</span>
+    </div>
+</section>
+
+<!-- Teaching -->
+<section id="teaching">
+    <h2>Teaching</h2>
+    <div class="section-line"></div>
+    <div class="two-col">
+        <div>
+            <h4 style="color:var(--navy); margin-bottom:0.5rem;">Dongguk University</h4>
+            <p style="font-size:0.85rem; color:var(--accent); margin-bottom:0.5rem;">Fall 2019 &ndash; Present</p>
+            <ul style="font-size:0.9rem; color:var(--text-light); padding-left:1.2rem;">
+                <li>Microeconomics 1</li>
+                <li>Principles of Economics 1</li>
+                <li>Labor Economics</li>
+                <li>Data Economics</li>
+            </ul>
+        </div>
+        <div>
+            <h4 style="color:var(--navy); margin-bottom:0.5rem;">Gachon University</h4>
+            <p style="font-size:0.85rem; color:var(--accent); margin-bottom:0.5rem;">Fall 2018 &ndash; Spring 2019</p>
+            <ul style="font-size:0.9rem; color:var(--text-light); padding-left:1.2rem;">
+                <li>Statistics for Economists</li>
+                <li>Econometrics</li>
+                <li>Labor Economics</li>
+                <li>Mathematics for Economists</li>
+                <li>Principles of Economics 2</li>
+            </ul>
+            <br>
+            <h4 style="color:var(--navy); margin-bottom:0.5rem;">University at Albany, SUNY</h4>
+            <p style="font-size:0.85rem; color:var(--accent); margin-bottom:0.5rem;">Spring 2012 &ndash; Fall 2014</p>
+            <ul style="font-size:0.9rem; color:var(--text-light); padding-left:1.2rem;">
+                <li>Labor Economics</li>
+                <li>Principles of Economics 2</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<!-- Contact -->
+<div class="contact-section" id="contact">
+    <div class="contact-inner">
+        <h2>Contact</h2>
+        <div class="section-line"></div>
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="label">Email</div>
+                <div class="value"><a href="mailto:jungtaeklee@dongguk.edu">jungtaeklee@dongguk.edu</a></div>
+            </div>
+            <div class="contact-card">
+                <div class="label">Phone</div>
+                <div class="value">+82-2-2260-3257</div>
+            </div>
+            <div class="contact-card">
+                <div class="label">Office</div>
+                <div class="value">
+                    Department of Economics<br>
+                    Dongguk University<br>
+                    30, Pildong-ro 1-gil, Jung-gu<br>
+                    Seoul 04620, Korea
+                </div>
+            </div>
+            <div class="contact-card">
+                <div class="label">Profiles</div>
+                <div class="value">
+                    <a href="https://scholar.google.com/citations?user=ryZHu90AAAAJ&hl=en">Google Scholar</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer>
+    &copy; 2026 Jungtaek Lee. All rights reserved.
+</footer>
+
+</body>
+</html>
