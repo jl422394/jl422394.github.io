@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Connectedness and Cognitive Function - Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Slide Container ── */
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vh 8vw;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* ── Slide 1: Title ── */
+        .slide-title {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-title .top-label {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .slide-title h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.35;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            letter-spacing: -0.02em;
+        }
+        .slide-title .authors {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .slide-title .journal {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+        }
+        .slide-title .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Slide 2: Research Question ── */
+        .slide-question {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-question .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-question h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2.5rem;
+            max-width: 850px;
+        }
+        .question-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .q-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .q-card .q-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .q-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #8bb8e0;
+        }
+        .q-card p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 3: Background ── */
+        .slide-background {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-background .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-background h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+        .tv-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 1.2rem 1rem;
+        }
+        .tv-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid rgba(255,255,255,0.15);
+            transform: translateY(-50%);
+        }
+        .tv-item:last-child::after { display: none; }
+        .tv-item .tv-year {
+            font-size: 0.82rem;
+            color: #5b8abf;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tv-item .tv-label {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+        .tv-item .tv-desc {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 0.3rem;
+        }
+        .bg-point {
+            background: rgba(91,138,191,0.1);
+            border-left: 3px solid #5b8abf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── Slide 4: Methodology ── */
+        .slide-method {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-method .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-method h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .method-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .method-box h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5b8abf;
+            margin-bottom: 1rem;
+        }
+        .method-box p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.65;
+        }
+        .method-box .highlight {
+            color: #8bb8e0;
+            font-weight: 600;
+        }
+
+        /* ── Slide 5: Findings ── */
+        .slide-findings {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-findings .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-findings h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .finding-items {
+            max-width: 900px;
+        }
+        .finding-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .finding-num {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: rgba(91,138,191,0.15);
+            border: 2px solid #5b8abf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5b8abf;
+        }
+        .finding-text h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #e8f0f8;
+        }
+        .finding-text p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 6: Implications ── */
+        .slide-implications {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-implications .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-implications h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .impl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .impl-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .impl-card .impl-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .impl-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #8bb8e0;
+        }
+        .impl-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.55;
+        }
+
+        /* ── Slide 7: Closing ── */
+        .slide-closing {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            align-items: center;
+        }
+        .slide-closing h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .slide-closing .closing-info {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+        .slide-closing .closing-info a {
+            color: #8bb8e0;
+            text-decoration: none;
+        }
+        .slide-closing .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Navigation ── */
+        .nav-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #fff; }
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active {
+            background: #5b8abf;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .slide-counter {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ── Footer branding ── */
+        .brand-footer {
+            position: fixed;
+            bottom: 5rem;
+            right: 3rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.05em;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide slide-title active" data-index="0">
+        <div class="top-label">Research Presentation</div>
+        <h1>Social Connectedness and Cognitive Function Before and During COVID-19</h1>
+        <div class="authors">Jungtaek Lee &amp; Juyeon Kim</div>
+        <div class="journal">Psychiatry Investigation, 2023, Vol. 20(4), pp. 325&ndash;333 &middot; SSCI</div>
+        <div class="accent-line"></div>
+    </div>
+
+    <!-- Slide 2: Research Question -->
+    <div class="slide slide-question" data-index="1">
+        <div class="section-label">Research Question</div>
+        <h2>사회적 교류의 감소가 노인의<br>인지기능 저하를 유발하는가?</h2>
+        <div class="question-cards">
+            <div class="q-card">
+                <div class="q-icon">&#x1F9E0;</div>
+                <h4>인과관계의 규명</h4>
+                <p>사회적 교류 빈도와 인지기능 간의 관계는 단순 상관인가, 아니면 인과적 효과인가?</p>
+            </div>
+            <div class="q-card">
+                <div class="q-icon">&#x1F9EA;</div>
+                <h4>자연실험으로서의 COVID-19</h4>
+                <p>팬데믹이 사회적 교류를 외생적으로 감소시킨 도구변수(IV)로 활용될 수 있는가?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Background -->
+    <div class="slide slide-background" data-index="2">
+        <div class="section-label">Background</div>
+        <h2>연구 배경</h2>
+        <div class="timeline-visual">
+            <div class="tv-item">
+                <div class="tv-year">COVID-19 이전</div>
+                <div class="tv-label">정상적 사회활동</div>
+                <div class="tv-desc">가족 및 친구와의 정기적 만남</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">2020</div>
+                <div class="tv-label">사회적 거리두기</div>
+                <div class="tv-desc">대면 교류의 급격한 감소</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">연구 시점</div>
+                <div class="tv-label">인지기능 변화 관찰</div>
+                <div class="tv-desc">종단 데이터를 통한 추적</div>
+            </div>
+        </div>
+        <div class="bg-point">
+            <strong>핵심 배경:</strong> 기존 연구에서 사회적 교류와 인지기능의 상관관계는 보고되었으나, 내생성 문제로 인과관계 규명이 어려웠습니다.<br>
+            본 연구는 COVID-19라는 <strong>외생적 충격(exogenous shock)</strong>을 도구변수로 활용하여 인과적 효과를 식별합니다.
+        </div>
+    </div>
+
+    <!-- Slide 4: Methodology -->
+    <div class="slide slide-method" data-index="3">
+        <div class="section-label">Methodology</div>
+        <h2>연구 방법</h2>
+        <div class="method-grid">
+            <div class="method-box">
+                <h4>Data</h4>
+                <p>
+                    <span class="highlight">한국고령자패널조사 (KLoSA)</span><br>
+                    한국 고령자를 대상으로 한 종단 패널 데이터를 활용하여 COVID-19 전후 인지기능 변화를 추적
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Instrumental Variable</h4>
+                <p>
+                    <span class="highlight">COVID-19 팬데믹</span>을 사회적 교류 빈도에 대한 도구변수(IV)로 활용하여 내생성 문제를 해결
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Key Variables</h4>
+                <p>
+                    독립변수: <span class="highlight">사회적 만남 빈도</span><br>
+                    종속변수: <span class="highlight">인지기능 점수</span> (K-MMSE 등 표준화된 인지검사 도구 활용)
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Identification Strategy</h4>
+                <p>
+                    <span class="highlight">도구변수 회귀분석 (IV Regression)</span>을 통해 사회적 교류가 인지기능에 미치는 인과적 효과를 추정
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Key Findings -->
+    <div class="slide slide-findings" data-index="4">
+        <div class="section-label">Key Findings</div>
+        <h2>주요 발견</h2>
+        <div class="finding-items">
+            <div class="finding-item">
+                <div class="finding-num">1</div>
+                <div class="finding-text">
+                    <h4>COVID-19로 인한 사회적 교류 감소 확인</h4>
+                    <p>팬데믹 기간 동안 한국 고령자의 사회적 만남 빈도가 유의미하게 감소하였으며, 이는 도구변수의 적합성을 뒷받침합니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">2</div>
+                <div class="finding-text">
+                    <h4>사회적 교류 감소가 인지기능 저하를 인과적으로 유발</h4>
+                    <p>IV 회귀분석 결과, 만남 빈도가 1단위 증가하면 인지기능 점수가 0.15~0.50점 향상되는 인과적 효과가 확인되었습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">3</div>
+                <div class="finding-text">
+                    <h4>OLS 추정치와 IV 추정치의 차이</h4>
+                    <p>도구변수를 사용한 추정치가 일반 회귀분석보다 크게 나타나, 기존 연구가 사회적 교류의 효과를 과소추정했을 가능성을 시사합니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Implications -->
+    <div class="slide slide-implications" data-index="5">
+        <div class="section-label">Implications</div>
+        <h2>시사점</h2>
+        <div class="impl-grid">
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F3E5;</div>
+                <h4>공중보건 정책</h4>
+                <p>감염병 유행 시 사회적 거리두기가 고령자 인지건강에 미치는 부정적 영향을 고려한 정책 설계 필요</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F91D;</div>
+                <h4>사회적 교류 지원</h4>
+                <p>고령자의 사회적 만남 빈도를 유지할 수 있는 프로그램이 인지기능 보호에 효과적임을 입증</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F4CA;</div>
+                <h4>방법론적 기여</h4>
+                <p>COVID-19를 자연실험으로 활용한 도구변수 전략을 통해 인과관계 규명의 새로운 접근법을 제시</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Closing -->
+    <div class="slide slide-closing" data-index="6">
+        <h2>Thank You</h2>
+        <div class="closing-info">
+            Jungtaek Lee &amp; Juyeon Kim<br>
+            <em>Psychiatry Investigation</em>, 2023, Vol. 20(4), pp. 325&ndash;333<br><br>
+            Department of Economics, Dongguk University<br>
+            jungtaeklee@dongguk.edu<br>
+            <a href="https://jl422394.github.io/">jl422394.github.io</a>
+        </div>
+        <div class="accent-line"></div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button class="nav-btn" id="prevBtn">&#9664;</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn" id="nextBtn">&#9654;</button>
+    <div class="slide-counter" id="slideCounter">1 / 7</div>
+</div>
+
+<div class="brand-footer">Jungtaek Lee &middot; Dongguk University</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+    const slideCounter = document.getElementById('slideCounter');
+    let current = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        navDots.appendChild(dot);
+    });
+
+    function goTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides[current].classList.remove('active');
+        navDots.children[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        navDots.children[current].classList.add('active');
+        slideCounter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+</script>
+
+</body>
+</html>

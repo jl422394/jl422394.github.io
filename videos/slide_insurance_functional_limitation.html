@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Health Insurance and Self-Rated Health - Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Slide Container ── */
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vh 8vw;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* ── Slide 1: Title ── */
+        .slide-title {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-title .top-label {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .slide-title h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.35;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            letter-spacing: -0.02em;
+        }
+        .slide-title .authors {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .slide-title .journal {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+        }
+        .slide-title .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Slide 2: Research Question ── */
+        .slide-question {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-question .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-question h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2.5rem;
+            max-width: 850px;
+        }
+        .question-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .q-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .q-card .q-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .q-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #8bb8e0;
+        }
+        .q-card p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 3: Background ── */
+        .slide-background {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-background .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-background h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+        .tv-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 1.2rem 1rem;
+        }
+        .tv-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid rgba(255,255,255,0.15);
+            transform: translateY(-50%);
+        }
+        .tv-item:last-child::after { display: none; }
+        .tv-item .tv-year {
+            font-size: 0.82rem;
+            color: #5b8abf;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tv-item .tv-label {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+        .tv-item .tv-desc {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 0.3rem;
+        }
+        .bg-point {
+            background: rgba(91,138,191,0.1);
+            border-left: 3px solid #5b8abf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── Slide 4: Methodology ── */
+        .slide-method {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-method .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-method h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .method-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .method-box h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5b8abf;
+            margin-bottom: 1rem;
+        }
+        .method-box p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.65;
+        }
+        .method-box .highlight {
+            color: #8bb8e0;
+            font-weight: 600;
+        }
+
+        /* ── Slide 5: Findings ── */
+        .slide-findings {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-findings .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-findings h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .finding-items {
+            max-width: 900px;
+        }
+        .finding-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .finding-num {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: rgba(91,138,191,0.15);
+            border: 2px solid #5b8abf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5b8abf;
+        }
+        .finding-text h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #e8f0f8;
+        }
+        .finding-text p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 6: Implications ── */
+        .slide-implications {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-implications .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-implications h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .impl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .impl-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .impl-card .impl-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .impl-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #8bb8e0;
+        }
+        .impl-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.55;
+        }
+
+        /* ── Slide 7: Closing ── */
+        .slide-closing {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            align-items: center;
+        }
+        .slide-closing h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .slide-closing .closing-info {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+        .slide-closing .closing-info a {
+            color: #8bb8e0;
+            text-decoration: none;
+        }
+        .slide-closing .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Navigation ── */
+        .nav-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #fff; }
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active {
+            background: #5b8abf;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .slide-counter {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ── Footer branding ── */
+        .brand-footer {
+            position: fixed;
+            bottom: 5rem;
+            right: 3rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.05em;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide slide-title active" data-index="0">
+        <div class="top-label">Research Presentation</div>
+        <h1>The Effect of Health Insurance on Self-Rated Health: Evidence from Older Adults with Functional Limitation</h1>
+        <div class="authors">Jungtaek Lee &amp; Juyeon Kim</div>
+        <div class="journal">The Korean Journal of Health Economics and Policy (보건경제와정책연구), 2022, Vol. 28(4), pp. 123&ndash;156 &middot; KCI</div>
+        <div class="accent-line"></div>
+    </div>
+
+    <!-- Slide 2: Research Question -->
+    <div class="slide slide-question" data-index="1">
+        <div class="section-label">Research Question</div>
+        <h2>건강보험은 기능제한 고령자의<br>주관적 건강상태를 개선하는가?</h2>
+        <div class="question-cards">
+            <div class="q-card">
+                <div class="q-icon">&#x1F3E5;</div>
+                <h4>의료 접근성</h4>
+                <p>건강보험 가입이 기능제한 고령자의 의료서비스 이용과 건강 인식에 미치는 영향은 무엇인가?</p>
+            </div>
+            <div class="q-card">
+                <div class="q-icon">&#x1F9D3;</div>
+                <h4>취약계층 건강</h4>
+                <p>일상생활 수행에 제한이 있는 고령자에게 보험의 보호 효과는 일반 고령자와 어떻게 다른가?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Background -->
+    <div class="slide slide-background" data-index="2">
+        <div class="section-label">Background</div>
+        <h2>연구 배경</h2>
+        <div class="timeline-visual">
+            <div class="tv-item">
+                <div class="tv-year">고령화 심화</div>
+                <div class="tv-label">만성질환 증가</div>
+                <div class="tv-desc">기능제한 고령인구 확대</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">의료비 부담</div>
+                <div class="tv-label">높은 본인부담금</div>
+                <div class="tv-desc">미충족 의료 발생</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">보험의 역할</div>
+                <div class="tv-label">건강보험 보장성 강화</div>
+                <div class="tv-desc">취약계층 건강 보호</div>
+            </div>
+        </div>
+        <div class="bg-point">
+            <strong>핵심 배경:</strong> 기능제한이 있는 고령자는 의료 필요도가 높아 건강보험의 영향에 특히 민감한 집단입니다.<br>
+            그러나 이 집단에 대한 건강보험의 <strong>주관적 건강(self-rated health)</strong> 개선 효과는 충분히 규명되지 않았습니다.
+        </div>
+    </div>
+
+    <!-- Slide 4: Methodology -->
+    <div class="slide slide-method" data-index="3">
+        <div class="section-label">Methodology</div>
+        <h2>연구 방법</h2>
+        <div class="method-grid">
+            <div class="method-box">
+                <h4>Data</h4>
+                <p>
+                    <span class="highlight">Health and Retirement Study (HRS)</span><br>
+                    미국 고령자를 대상으로 한 대표적 종단 패널 데이터를 활용하여 건강보험과 건강상태의 관계를 분석
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Sample</h4>
+                <p>
+                    <span class="highlight">기능제한(Functional Limitation)이 있는 고령자</span>를 대상으로, 일상생활 수행능력(ADL/IADL)에 제한이 있는 집단을 선별
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Outcome</h4>
+                <p>
+                    <span class="highlight">주관적 건강상태(Self-Rated Health)</span>를 종속변수로 설정하여 보험이 건강 인식에 미치는 효과를 측정
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Identification</h4>
+                <p>
+                    Medicare 수급 연령(65세)을 활용한 <span class="highlight">Regression Discontinuity Design (RDD)</span> 전략으로 인과적 효과를 식별
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Key Findings -->
+    <div class="slide slide-findings" data-index="4">
+        <div class="section-label">Key Findings</div>
+        <h2>주요 발견</h2>
+        <div class="finding-items">
+            <div class="finding-item">
+                <div class="finding-num">1</div>
+                <div class="finding-text">
+                    <h4>건강보험이 주관적 건강상태를 유의미하게 개선</h4>
+                    <p>기능제한이 있는 고령자에서 건강보험 가입은 자기평가 건강상태를 통계적으로 유의하게 향상시키는 것으로 나타났습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">2</div>
+                <div class="finding-text">
+                    <h4>기능제한 고령자에서 효과가 더 크게 나타남</h4>
+                    <p>일반 고령자 대비 기능제한이 있는 고령자에서 건강보험의 건강 개선 효과가 더 뚜렷하게 관찰되었습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">3</div>
+                <div class="finding-text">
+                    <h4>의료 이용 증가를 통한 간접 경로 확인</h4>
+                    <p>건강보험이 의료서비스 이용을 촉진하고, 이를 통해 주관적 건강상태가 개선되는 경로가 확인되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Implications -->
+    <div class="slide slide-implications" data-index="5">
+        <div class="section-label">Implications</div>
+        <h2>시사점</h2>
+        <div class="impl-grid">
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F3E5;</div>
+                <h4>보건정책</h4>
+                <p>기능제한 고령자를 대상으로 한 건강보험 보장성 강화의 근거를 제시하며, 취약계층 맞춤형 정책 필요성을 강조</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F4CA;</div>
+                <h4>학술적 기여</h4>
+                <p>건강보험 효과 연구에서 기능제한이라는 이질적 집단을 구분하여 분석한 차별화된 접근을 제시</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F9D1;&#x200D;&#x2695;&#xFE0F;</div>
+                <h4>고령자 복지</h4>
+                <p>건강보험이 단순한 의료비 경감을 넘어 고령자의 주관적 안녕감 향상에 기여할 수 있음을 시사</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Closing -->
+    <div class="slide slide-closing" data-index="6">
+        <h2>Thank You</h2>
+        <div class="closing-info">
+            Jungtaek Lee &amp; Juyeon Kim<br>
+            <em>The Korean Journal of Health Economics and Policy</em>, 2022, Vol. 28(4)<br><br>
+            Department of Economics, Dongguk University<br>
+            jungtaeklee@dongguk.edu<br>
+            <a href="https://jl422394.github.io/">jl422394.github.io</a>
+        </div>
+        <div class="accent-line"></div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button class="nav-btn" id="prevBtn">&#9664;</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn" id="nextBtn">&#9654;</button>
+    <div class="slide-counter" id="slideCounter">1 / 7</div>
+</div>
+
+<div class="brand-footer">Jungtaek Lee &middot; Dongguk University</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+    const slideCounter = document.getElementById('slideCounter');
+    let current = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        navDots.appendChild(dot);
+    });
+
+    function goTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides[current].classList.remove('active');
+        navDots.children[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        navDots.children[current].classList.add('active');
+        slideCounter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+</script>
+
+</body>
+</html>

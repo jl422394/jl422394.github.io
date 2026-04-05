@@ -442,6 +442,56 @@
             color: #666;
         }
 
+        /* ── Presentations ── */
+        .pres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.2rem;
+        }
+        .pres-card {
+            display: block;
+            padding: 1.2rem 1.4rem;
+            background: var(--white);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.2s;
+        }
+        .pres-card:hover {
+            border-color: var(--accent);
+            box-shadow: 0 4px 12px rgba(61,107,153,0.12);
+            transform: translateY(-2px);
+        }
+        .pres-card .pres-title {
+            font-weight: 600;
+            font-size: 0.92rem;
+            color: var(--navy);
+            margin-bottom: 0.4rem;
+            line-height: 1.45;
+        }
+        .pres-card .pres-meta {
+            font-size: 0.78rem;
+            color: var(--text-light);
+        }
+        .pres-card .pres-badge {
+            display: inline-block;
+            font-size: 0.68rem;
+            font-weight: 600;
+            padding: 0.1rem 0.45rem;
+            border-radius: 3px;
+            margin-right: 0.3rem;
+        }
+        .pres-badge-ssci { background: #e3f2fd; color: #1565c0; }
+        .pres-badge-sci { background: #e8f5e9; color: #2e7d32; }
+        .pres-badge-kci { background: #fff3e0; color: #e65100; }
+        .pres-play {
+            display: inline-block;
+            font-size: 0.75rem;
+            color: var(--accent);
+            margin-top: 0.5rem;
+            font-weight: 500;
+        }
+
         /* ── Responsive ── */
         @media (max-width: 768px) {
             .hero h1 { font-size: 2rem; }
@@ -460,6 +510,7 @@
         <div class="nav-links">
             <a href="#about">About</a>
             <a href="#publications">Research</a>
+            <a href="#presentations">Presentations</a>
             <a href="#experience">Experience</a>
             <a href="#teaching">Teaching</a>
             <a href="#contact">Contact</a>
@@ -801,6 +852,106 @@
             <span class="wp-status">In Progress</span>
             <span class="pub-tag tag-labor">Labor Economics</span>
         </div>
+    </div>
+</section>
+
+<!-- Research Presentations -->
+<section id="presentations">
+    <h2>Research Presentations</h2>
+    <div class="section-line"></div>
+    <p style="color: var(--text-light); font-size: 0.9rem; margin-bottom: 1.5rem;">Interactive slide presentations summarizing each published paper. Click to view.</p>
+
+    <h3 style="font-size:1.05rem; margin-bottom:1rem; color:var(--navy);">International Journals (SSCI/SCI)</h3>
+    <div class="pres-grid" style="margin-bottom:2.5rem;">
+        <a class="pres-card" href="videos/slide_remote_work_union.html" target="_blank">
+            <div class="pres-title">Remote Work and the Bargaining Power of Union Workers Before and After COVID-19</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Applied Economics Letters, 2025</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_remote_work_distress.html" target="_blank">
+            <div class="pres-title">Remote Work and Psychological Distress Across Gender, Age, and Employment Sector</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Int'l Journal of Organization Theory &amp; Behavior, 2024</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_social_connectedness_depression.html" target="_blank">
+            <div class="pres-title">Age-Specific Changes in the Effects of Social Connectedness and Loneliness on Depressive Symptoms</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Psychiatry Investigation, 2024</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_phi_mers.html" target="_blank">
+            <div class="pres-title">Effects of Private Health Insurance on Healthcare Services During the MERS Pandemic</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-sci">SCI</span> Heliyon, 2023</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_vaccination_isolation.html" target="_blank">
+            <div class="pres-title">The Effect of Vaccination on Social Isolation During the COVID-19 Pandemic</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Applied Economics Letters, 2023</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_social_cognitive.html" target="_blank">
+            <div class="pres-title">Social Connectedness and Cognitive Function Before and During COVID-19</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Psychiatry Investigation, 2023</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_insurance_mental_health.html" target="_blank">
+            <div class="pres-title">The Role of Health Insurance in Mental Healthcare for Young Adults</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Applied Economics, 2020</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_insurance_risky_behaviors.html" target="_blank">
+            <div class="pres-title">Effects of Health Insurance Coverage on Risky Behaviors</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Health Economics, 2018</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_sunday_alcohol_crime.html" target="_blank">
+            <div class="pres-title">Does Legalization of Sunday Alcohol Sales Increase Crime?</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-ssci">SSCI</span> Journal of Studies on Alcohol and Drugs, 2018</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+    </div>
+
+    <h3 style="font-size:1.05rem; margin-bottom:1rem; color:var(--navy);">Domestic Journals (KCI)</h3>
+    <div class="pres-grid">
+        <a class="pres-card" href="videos/slide_medicare_self_rated_health.html" target="_blank">
+            <div class="pres-title">Health Insurance is Healthy: An Effect of Obtaining Medicare on Self-Rated Health</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Journal of Insurance and Finance, 2023</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_mask_wearing.html" target="_blank">
+            <div class="pres-title">The Impact of Social Factors on Adherence to Mask-Wearing During the COVID-19 Outbreak</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> The Journal of Women and Economics, 2023</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_insurance_functional_limitation.html" target="_blank">
+            <div class="pres-title">The Effect of Health Insurance on Self-Rated Health: Evidence from Older Adults with Functional Limitation</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Korean Journal of Health Economics and Policy, 2022</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_childcare_women_labor.html" target="_blank">
+            <div class="pres-title">The Effect of an Increase in Child Care Needs on Women's Labor Market Outcomes During COVID-19</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> The Journal of Women and Economics, 2022</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_depression_cognitive.html" target="_blank">
+            <div class="pres-title">The Causal Effect of Depression on Cognitive Function</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Korean Journal of Health Economics and Policy, 2022</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_basic_livelihood_reform.html" target="_blank">
+            <div class="pres-title">Macroeconomic Impacts of the Reform of National Basic Livelihood Security System</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Journal of Insurance and Finance, 2021</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_living_arrangements_cognitive.html" target="_blank">
+            <div class="pres-title">Living Arrangements and Cognitive Function Among Korean Older Adults</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Survey Research, 2018</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
+        <a class="pres-card" href="videos/slide_retirement_health.html" target="_blank">
+            <div class="pres-title">The Effect of Retirement on Health Behaviors, Mental Health and Subjective Health Status</div>
+            <div class="pres-meta"><span class="pres-badge pres-badge-kci">KCI</span> Public Health and Social Science, 2018</div>
+            <div class="pres-play">&#9654; View Presentation</div>
+        </a>
     </div>
 </section>
 

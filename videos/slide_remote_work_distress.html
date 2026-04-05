@@ -1,0 +1,659 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remote Work and Psychological Distress - Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Slide Container ── */
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vh 8vw;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* ── Slide 1: Title ── */
+        .slide-title {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-title .top-label {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .slide-title h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.35;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            letter-spacing: -0.02em;
+        }
+        .slide-title .authors {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .slide-title .journal {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+        }
+        .slide-title .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Slide 2: Research Question ── */
+        .slide-question {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-question .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-question h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2.5rem;
+            max-width: 850px;
+        }
+        .question-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .q-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .q-card .q-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .q-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #8bb8e0;
+        }
+        .q-card p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 3: Background ── */
+        .slide-background {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-background .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-background h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+        .tv-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 1.2rem 1rem;
+        }
+        .tv-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid rgba(255,255,255,0.15);
+            transform: translateY(-50%);
+        }
+        .tv-item:last-child::after { display: none; }
+        .tv-item .tv-year {
+            font-size: 0.82rem;
+            color: #5b8abf;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tv-item .tv-label {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+        .tv-item .tv-desc {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 0.3rem;
+        }
+        .bg-point {
+            background: rgba(91,138,191,0.1);
+            border-left: 3px solid #5b8abf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── Slide 4: Methodology ── */
+        .slide-method {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-method .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-method h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .method-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .method-box h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5b8abf;
+            margin-bottom: 1rem;
+        }
+        .method-box p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.65;
+        }
+        .method-box .highlight {
+            color: #8bb8e0;
+            font-weight: 600;
+        }
+
+        /* ── Slide 5: Findings ── */
+        .slide-findings {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-findings .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-findings h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .finding-items {
+            max-width: 900px;
+        }
+        .finding-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .finding-num {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: rgba(91,138,191,0.15);
+            border: 2px solid #5b8abf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5b8abf;
+        }
+        .finding-text h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #e8f0f8;
+        }
+        .finding-text p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 6: Implications ── */
+        .slide-implications {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-implications .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-implications h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .impl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .impl-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .impl-card .impl-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .impl-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #8bb8e0;
+        }
+        .impl-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.55;
+        }
+
+        /* ── Slide 7: Closing ── */
+        .slide-closing {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            align-items: center;
+        }
+        .slide-closing h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .slide-closing .closing-info {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+        .slide-closing .closing-info a {
+            color: #8bb8e0;
+            text-decoration: none;
+        }
+        .slide-closing .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Navigation ── */
+        .nav-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #fff; }
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active {
+            background: #5b8abf;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .slide-counter {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ── Footer branding ── */
+        .brand-footer {
+            position: fixed;
+            bottom: 5rem;
+            right: 3rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.05em;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide slide-title active" data-index="0">
+        <div class="top-label">Research Presentation</div>
+        <h1>Remote Work and Psychological Distress Across Gender, Age, and Employment Sector</h1>
+        <div class="authors">Jaehee Jong &amp; Jungtaek Lee</div>
+        <div class="journal">International Journal of Organization Theory &amp; Behavior, 2024, Vol. 27(4), pp. 359&ndash;378 &middot; SSCI</div>
+        <div class="accent-line"></div>
+    </div>
+
+    <!-- Slide 2: Research Question -->
+    <div class="slide slide-question" data-index="1">
+        <div class="section-label">Research Question</div>
+        <h2>재택근무는 심리적 고통과 어떤 관계가 있으며,<br>그 효과는 집단별로 어떻게 다른가?</h2>
+        <div class="question-cards">
+            <div class="q-card">
+                <div class="q-icon">&#x1F9E0;</div>
+                <h4>재택근무와 심리적 고통</h4>
+                <p>COVID-19 팬데믹 기간 재택근무가 근로자의 심리적 고통(psychological distress)에 미치는 영향은 무엇인가?</p>
+            </div>
+            <div class="q-card">
+                <div class="q-icon">&#x1F465;</div>
+                <h4>이질적 효과(Heterogeneous Effects)</h4>
+                <p>성별, 연령, 고용 부문에 따라 재택근무의 심리적 영향은 어떻게 달라지는가?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Background -->
+    <div class="slide slide-background" data-index="2">
+        <div class="section-label">Background</div>
+        <h2>연구 배경</h2>
+        <div class="timeline-visual">
+            <div class="tv-item">
+                <div class="tv-year">2020년 초</div>
+                <div class="tv-label">COVID-19 확산</div>
+                <div class="tv-desc">대규모 재택근무 전환</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">2020&ndash;2021</div>
+                <div class="tv-label">장기화된 원격근무</div>
+                <div class="tv-desc">일과 삶의 경계 모호</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">연구 공백</div>
+                <div class="tv-label">집단별 차이 미규명</div>
+                <div class="tv-desc">하위집단 분석 부족</div>
+            </div>
+        </div>
+        <div class="bg-point">
+            <strong>핵심 배경:</strong> 기존 연구는 재택근무의 심리적 영향을 평균적으로 분석했으나, 성별, 연령, 고용 부문에 따른 <strong>이질적 효과(heterogeneous effects)</strong>를 체계적으로 규명한 연구는 부족합니다.
+        </div>
+    </div>
+
+    <!-- Slide 4: Methodology -->
+    <div class="slide slide-method" data-index="3">
+        <div class="section-label">Methodology</div>
+        <h2>연구 방법</h2>
+        <div class="method-grid">
+            <div class="method-box">
+                <h4>Data</h4>
+                <p>
+                    <span class="highlight">Understanding America Study (UAS)</span><br>
+                    2020&ndash;2021년 미국 대표 패널 조사 데이터에서 <span class="highlight">76,845개 관측치</span>를 활용
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Independent Variable</h4>
+                <p>
+                    <span class="highlight">재택근무 여부</span>를 주요 독립변수로 설정하여 원격근무 경험이 심리적 결과에 미치는 영향을 분석
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Dependent Variable</h4>
+                <p>
+                    <span class="highlight">심리적 고통(Psychological Distress)</span>을 종속변수로 측정하여 정신건강 상태의 변화를 포착
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Moderators</h4>
+                <p>
+                    <span class="highlight">성별, 연령(30세 기준), 고용 부문</span>(정부, 비영리, 민간)별 하위집단 분석으로 이질적 효과를 식별
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Key Findings -->
+    <div class="slide slide-findings" data-index="4">
+        <div class="section-label">Key Findings</div>
+        <h2>주요 발견</h2>
+        <div class="finding-items">
+            <div class="finding-item">
+                <div class="finding-num">1</div>
+                <div class="finding-text">
+                    <h4>재택근무는 심리적 고통과 유의미한 정(+)의 관계</h4>
+                    <p>전체 표본에서 재택근무 경험은 심리적 고통 수준의 증가와 통계적으로 유의미하게 연관되었습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">2</div>
+                <div class="finding-text">
+                    <h4>연령별 차이: 30세 이상에서 효과 강화</h4>
+                    <p>30세 이상 근로자에게서 재택근무의 심리적 고통 효과가 더 강하게 나타났으며, 30세 미만 젊은 근로자에게는 유의미하지 않았습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">3</div>
+                <div class="finding-text">
+                    <h4>고용 부문별 차이: 비영리 및 민간 부문에서 유의미</h4>
+                    <p>비영리 및 민간 부문 근로자에게서 재택근무의 심리적 고통 효과가 유의미했으나, 정부 부문 근로자에게는 유의미한 효과가 나타나지 않았습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">4</div>
+                <div class="finding-text">
+                    <h4>성별에 따른 차이는 제한적</h4>
+                    <p>성별에 따른 재택근무의 심리적 고통 효과 차이는 상대적으로 뚜렷하지 않았으며, 연령과 부문이 더 중요한 조절 요인으로 확인되었습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Implications -->
+    <div class="slide slide-implications" data-index="5">
+        <div class="section-label">Implications</div>
+        <h2>시사점</h2>
+        <div class="impl-grid">
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F3E5;</div>
+                <h4>조직 관리</h4>
+                <p>재택근무 정책 설계 시 연령대와 고용 부문에 따른 차별화된 심리건강 지원 프로그램이 필요</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F4CB;</div>
+                <h4>정책적 함의</h4>
+                <p>비영리 및 민간 부문의 원격근무 근로자를 위한 정신건강 지원 정책의 우선적 마련이 필요</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F4D6;</div>
+                <h4>학술적 기여</h4>
+                <p>재택근무의 심리적 영향이 균일하지 않음을 대규모 데이터로 실증하여 이질적 효과 연구의 기반을 제공</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Closing -->
+    <div class="slide slide-closing" data-index="6">
+        <h2>Thank You</h2>
+        <div class="closing-info">
+            Jaehee Jong &amp; Jungtaek Lee<br>
+            <em>International Journal of Organization Theory &amp; Behavior</em>, 2024, Vol. 27(4)<br><br>
+            Department of Economics, Dongguk University<br>
+            jungtaeklee@dongguk.edu<br>
+            <a href="https://jl422394.github.io/">jl422394.github.io</a>
+        </div>
+        <div class="accent-line"></div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button class="nav-btn" id="prevBtn">&#9664;</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn" id="nextBtn">&#9654;</button>
+    <div class="slide-counter" id="slideCounter">1 / 7</div>
+</div>
+
+<div class="brand-footer">Jungtaek Lee &middot; Dongguk University</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+    const slideCounter = document.getElementById('slideCounter');
+    let current = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        navDots.appendChild(dot);
+    });
+
+    function goTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides[current].classList.remove('active');
+        navDots.children[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        navDots.children[current].classList.add('active');
+        slideCounter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+</script>
+
+</body>
+</html>

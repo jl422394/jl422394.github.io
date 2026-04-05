@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Factors and Mask-Wearing Adherence - Presentation</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Lora:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Noto Sans KR', 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+            width: 100vw;
+        }
+
+        /* ── Slide Container ── */
+        .slide-container {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 5vh 8vw;
+            opacity: 0;
+            transform: translateX(60px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+            pointer-events: none;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: translateX(0);
+            pointer-events: auto;
+        }
+
+        /* ── Slide 1: Title ── */
+        .slide-title {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            justify-content: center;
+            align-items: center;
+        }
+        .slide-title .top-label {
+            font-size: 1rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 2rem;
+            font-weight: 400;
+        }
+        .slide-title h1 {
+            font-family: 'Lora', serif;
+            font-size: 2.8rem;
+            font-weight: 600;
+            line-height: 1.35;
+            max-width: 900px;
+            margin: 0 auto 2rem;
+            letter-spacing: -0.02em;
+        }
+        .slide-title .authors {
+            font-size: 1.15rem;
+            color: rgba(255,255,255,0.8);
+            margin-bottom: 0.5rem;
+            font-weight: 400;
+        }
+        .slide-title .journal {
+            font-size: 0.95rem;
+            color: rgba(255,255,255,0.5);
+            font-style: italic;
+        }
+        .slide-title .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Slide 2: Research Question ── */
+        .slide-question {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-question .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-question h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            line-height: 1.4;
+            margin-bottom: 2.5rem;
+            max-width: 850px;
+        }
+        .question-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .q-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .q-card .q-icon {
+            font-size: 2rem;
+            margin-bottom: 0.8rem;
+        }
+        .q-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #8bb8e0;
+        }
+        .q-card p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.65);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 3: Background ── */
+        .slide-background {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-background .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-background h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .timeline-visual {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            max-width: 900px;
+            margin-bottom: 2rem;
+        }
+        .tv-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            padding: 1.2rem 1rem;
+        }
+        .tv-item::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            right: 0;
+            width: 0;
+            height: 0;
+            border-top: 10px solid transparent;
+            border-bottom: 10px solid transparent;
+            border-left: 10px solid rgba(255,255,255,0.15);
+            transform: translateY(-50%);
+        }
+        .tv-item:last-child::after { display: none; }
+        .tv-item .tv-year {
+            font-size: 0.82rem;
+            color: #5b8abf;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .tv-item .tv-label {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.8);
+            font-weight: 500;
+        }
+        .tv-item .tv-desc {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.45);
+            margin-top: 0.3rem;
+        }
+        .bg-point {
+            background: rgba(91,138,191,0.1);
+            border-left: 3px solid #5b8abf;
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            max-width: 900px;
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: rgba(255,255,255,0.75);
+        }
+
+        /* ── Slide 4: Methodology ── */
+        .slide-method {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-method .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-method h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .method-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .method-box {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+        }
+        .method-box h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: #5b8abf;
+            margin-bottom: 1rem;
+        }
+        .method-box p {
+            font-size: 0.92rem;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.65;
+        }
+        .method-box .highlight {
+            color: #8bb8e0;
+            font-weight: 600;
+        }
+
+        /* ── Slide 5: Findings ── */
+        .slide-findings {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-findings .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-findings h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .finding-items {
+            max-width: 900px;
+        }
+        .finding-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            align-items: flex-start;
+        }
+        .finding-num {
+            width: 48px;
+            height: 48px;
+            min-width: 48px;
+            border-radius: 50%;
+            background: rgba(91,138,191,0.15);
+            border: 2px solid #5b8abf;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #5b8abf;
+        }
+        .finding-text h4 {
+            font-size: 1.05rem;
+            font-weight: 600;
+            margin-bottom: 0.4rem;
+            color: #e8f0f8;
+        }
+        .finding-text p {
+            font-size: 0.88rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 1.6;
+        }
+
+        /* ── Slide 6: Implications ── */
+        .slide-implications {
+            background: linear-gradient(160deg, #0f1923 0%, #1a2332 100%);
+        }
+        .slide-implications .section-label {
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #5b8abf;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+        }
+        .slide-implications h2 {
+            font-family: 'Lora', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 2rem;
+        }
+        .impl-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 1.5rem;
+            max-width: 900px;
+        }
+        .impl-card {
+            background: rgba(255,255,255,0.04);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: 12px;
+            padding: 1.8rem;
+            text-align: center;
+        }
+        .impl-card .impl-icon {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+        .impl-card h4 {
+            font-size: 0.95rem;
+            font-weight: 600;
+            margin-bottom: 0.6rem;
+            color: #8bb8e0;
+        }
+        .impl-card p {
+            font-size: 0.82rem;
+            color: rgba(255,255,255,0.55);
+            line-height: 1.55;
+        }
+
+        /* ── Slide 7: Closing ── */
+        .slide-closing {
+            background: linear-gradient(135deg, #1a2332 0%, #2c3e6b 50%, #1a2332 100%);
+            text-align: center;
+            align-items: center;
+        }
+        .slide-closing h2 {
+            font-family: 'Lora', serif;
+            font-size: 2.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+        .slide-closing .closing-info {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.6);
+            line-height: 2;
+        }
+        .slide-closing .closing-info a {
+            color: #8bb8e0;
+            text-decoration: none;
+        }
+        .slide-closing .accent-line {
+            width: 80px;
+            height: 3px;
+            background: #5b8abf;
+            margin: 2rem auto 0;
+            border-radius: 2px;
+        }
+
+        /* ── Navigation ── */
+        .nav-bar {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(10px);
+            padding: 0.6rem 1.5rem;
+            border-radius: 30px;
+            border: 1px solid rgba(255,255,255,0.1);
+            z-index: 100;
+        }
+        .nav-btn {
+            background: none;
+            border: none;
+            color: rgba(255,255,255,0.7);
+            font-size: 1.2rem;
+            cursor: pointer;
+            padding: 0.3rem 0.6rem;
+            transition: color 0.2s;
+        }
+        .nav-btn:hover { color: #fff; }
+        .nav-dots {
+            display: flex;
+            gap: 0.5rem;
+        }
+        .nav-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        .nav-dot.active {
+            background: #5b8abf;
+            width: 24px;
+            border-radius: 4px;
+        }
+        .slide-counter {
+            font-size: 0.78rem;
+            color: rgba(255,255,255,0.4);
+            font-weight: 500;
+            min-width: 40px;
+            text-align: center;
+        }
+
+        /* ── Footer branding ── */
+        .brand-footer {
+            position: fixed;
+            bottom: 5rem;
+            right: 3rem;
+            font-size: 0.72rem;
+            color: rgba(255,255,255,0.2);
+            letter-spacing: 0.05em;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body>
+
+<div class="slide-container">
+
+    <!-- Slide 1: Title -->
+    <div class="slide slide-title active" data-index="0">
+        <div class="top-label">Research Presentation</div>
+        <h1>The Impact of Social Factors on Adherence to Mask-Wearing During the COVID-19 Outbreak</h1>
+        <div class="authors">Jungtaek Lee</div>
+        <div class="journal">The Journal of Women and Economics (&#50668;&#49457;&#44221;&#51228;&#50672;&#44396;), 2023, Vol. 20(1), pp. 61&ndash;86 &middot; KCI</div>
+        <div class="accent-line"></div>
+    </div>
+
+    <!-- Slide 2: Research Question -->
+    <div class="slide slide-question" data-index="1">
+        <div class="section-label">Research Question</div>
+        <h2>COVID-19 유행 시기, 마스크 착용 준수에<br>사회적 요인은 어떤 영향을 미쳤는가?</h2>
+        <div class="question-cards">
+            <div class="q-card">
+                <div class="q-icon">&#x1F637;</div>
+                <h4>사회적 요인</h4>
+                <p>성별, 연령, 교육 수준, 소득, 거주 지역 등 사회인구학적 요인이 마스크 착용 순응도에 미치는 영향은?</p>
+            </div>
+            <div class="q-card">
+                <div class="q-icon">&#x1F4CA;</div>
+                <h4>정책 순응도</h4>
+                <p>정부의 마스크 착용 의무화 정책에 대한 순응도가 사회적 집단별로 어떻게 다르게 나타나는가?</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 3: Background -->
+    <div class="slide slide-background" data-index="2">
+        <div class="section-label">Background</div>
+        <h2>연구 배경</h2>
+        <div class="timeline-visual">
+            <div class="tv-item">
+                <div class="tv-year">2020 초</div>
+                <div class="tv-label">COVID-19 확산</div>
+                <div class="tv-desc">전 세계적 팬데믹 선언</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">2020 중</div>
+                <div class="tv-label">마스크 의무화</div>
+                <div class="tv-desc">각국 정부의 착용 권고 및 의무화</div>
+            </div>
+            <div class="tv-item">
+                <div class="tv-year">2021&ndash;</div>
+                <div class="tv-label">순응도 격차</div>
+                <div class="tv-desc">사회적 집단 간 준수율 차이 관찰</div>
+            </div>
+        </div>
+        <div class="bg-point">
+            <strong>핵심 배경:</strong> 마스크 착용은 COVID-19 확산 방지를 위한 가장 기본적인 비약물적 개입(NPI) 수단이었으나,<br>
+            사회인구학적 특성에 따라 <strong>순응도의 유의미한 차이</strong>가 존재했습니다. 이러한 차이를 체계적으로 분석할 필요가 있습니다.
+        </div>
+    </div>
+
+    <!-- Slide 4: Methodology -->
+    <div class="slide slide-method" data-index="3">
+        <div class="section-label">Methodology</div>
+        <h2>연구 방법</h2>
+        <div class="method-grid">
+            <div class="method-box">
+                <h4>Data</h4>
+                <p>
+                    <span class="highlight">설문조사 데이터</span><br>
+                    COVID-19 유행 기간 중 수집된 개인 수준 설문조사 자료를 활용하여 마스크 착용 행태를 분석
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Variables</h4>
+                <p>
+                    <span class="highlight">사회인구학적 변수</span><br>
+                    성별, 연령, 교육 수준, 소득 수준, 거주 지역 등 다양한 사회적 요인을 독립변수로 설정
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Outcome</h4>
+                <p>
+                    <span class="highlight">마스크 착용 순응도</span><br>
+                    마스크 착용 빈도 및 준수 수준을 종속변수로 설정하여 정책 순응 행태를 측정
+                </p>
+            </div>
+            <div class="method-box">
+                <h4>Analysis</h4>
+                <p>
+                    <span class="highlight">회귀분석(Regression Analysis)</span>을 통해 사회적 요인이 마스크 착용 준수에 미치는 영향을 계량적으로 식별
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 5: Key Findings -->
+    <div class="slide slide-findings" data-index="4">
+        <div class="section-label">Key Findings</div>
+        <h2>주요 발견</h2>
+        <div class="finding-items">
+            <div class="finding-item">
+                <div class="finding-num">1</div>
+                <div class="finding-text">
+                    <h4>성별에 따른 순응도 차이</h4>
+                    <p>여성이 남성에 비해 마스크 착용 순응도가 유의미하게 높은 것으로 나타났으며, 이는 건강 행동에 대한 성별 차이와 일관된 결과입니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">2</div>
+                <div class="finding-text">
+                    <h4>교육 수준의 영향</h4>
+                    <p>교육 수준이 높을수록 마스크 착용 준수율이 높게 나타나, 감염병에 대한 이해도와 정책 순응 간의 양의 상관관계가 확인되었습니다.</p>
+                </div>
+            </div>
+            <div class="finding-item">
+                <div class="finding-num">3</div>
+                <div class="finding-text">
+                    <h4>연령 및 소득의 복합적 효과</h4>
+                    <p>고령층과 고소득층에서 상대적으로 높은 순응도가 관찰되었으며, 사회적 요인들이 복합적으로 작용하여 마스크 착용 행동에 영향을 미쳤습니다.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 6: Implications -->
+    <div class="slide slide-implications" data-index="5">
+        <div class="section-label">Implications</div>
+        <h2>시사점</h2>
+        <div class="impl-grid">
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F3E5;</div>
+                <h4>공중보건 정책</h4>
+                <p>사회적 집단별 맞춤형 방역 커뮤니케이션 전략이 필요하며, 취약 집단에 대한 타깃 메시지가 효과적</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F4DD;</div>
+                <h4>정책 설계</h4>
+                <p>마스크 착용 의무화 정책 시행 시, 순응도가 낮은 집단에 대한 추가적 지원과 교육 프로그램 마련 필요</p>
+            </div>
+            <div class="impl-card">
+                <div class="impl-icon">&#x1F52C;</div>
+                <h4>학술적 기여</h4>
+                <p>비약물적 개입 수단의 순응도에 대한 사회적 결정요인을 체계적으로 분석한 실증 연구로서 기여</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Slide 7: Closing -->
+    <div class="slide slide-closing" data-index="6">
+        <h2>Thank You</h2>
+        <div class="closing-info">
+            Jungtaek Lee<br>
+            <em>The Journal of Women and Economics</em>, 2023, Vol. 20(1)<br><br>
+            Department of Economics, Dongguk University<br>
+            jungtaeklee@dongguk.edu<br>
+            <a href="https://jl422394.github.io/">jl422394.github.io</a>
+        </div>
+        <div class="accent-line"></div>
+    </div>
+
+</div>
+
+<!-- Navigation -->
+<div class="nav-bar">
+    <button class="nav-btn" id="prevBtn">&#9664;</button>
+    <div class="nav-dots" id="navDots"></div>
+    <button class="nav-btn" id="nextBtn">&#9654;</button>
+    <div class="slide-counter" id="slideCounter">1 / 7</div>
+</div>
+
+<div class="brand-footer">Jungtaek Lee &middot; Dongguk University</div>
+
+<script>
+    const slides = document.querySelectorAll('.slide');
+    const navDots = document.getElementById('navDots');
+    const slideCounter = document.getElementById('slideCounter');
+    let current = 0;
+
+    // Create dots
+    slides.forEach((_, i) => {
+        const dot = document.createElement('div');
+        dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+        dot.addEventListener('click', () => goTo(i));
+        navDots.appendChild(dot);
+    });
+
+    function goTo(index) {
+        if (index < 0 || index >= slides.length) return;
+        slides[current].classList.remove('active');
+        navDots.children[current].classList.remove('active');
+        current = index;
+        slides[current].classList.add('active');
+        navDots.children[current].classList.add('active');
+        slideCounter.textContent = `${current + 1} / ${slides.length}`;
+    }
+
+    document.getElementById('prevBtn').addEventListener('click', () => goTo(current - 1));
+    document.getElementById('nextBtn').addEventListener('click', () => goTo(current + 1));
+
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight' || e.key === ' ') { e.preventDefault(); goTo(current + 1); }
+        if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(current - 1); }
+    });
+</script>
+
+</body>
+</html>
